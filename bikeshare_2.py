@@ -160,7 +160,7 @@ def trip_duration_stats(df):
 
 
 def user_stats(df):
-    """Displays statistics on bikeshare users."""
+    """Displays statistics on bikeshare users' Gender, Birth Year and Type"""
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
@@ -193,6 +193,7 @@ def user_stats(df):
         pass
 
 def display_scroll(df):
+    """ displays the raw dataset in scrolls of five rows"""
     row_index = 0 # initializing the row index to start printing from
     scroll = 5 # initializaing the number of lines to print out
     while True:
@@ -206,6 +207,7 @@ def display_scroll(df):
 
 
 def main():
+    """ Calls the functions and ends or continues the program based on user choice"""
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
