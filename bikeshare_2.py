@@ -196,30 +196,41 @@ def display_scroll(df):
     row_index = 0
     scroll = 5
     while True:
-        displayer = input('Would you like to see raw data scroll? enter yes or no ').lower().strip()
-        if displayer == 'yes':
-            print(tabulate(df.iloc[row_index:row_index + scroll], headers = 'keys'))
-            row_index += scroll
-        else: 
-            break
+           try:
+            displayer = input('\nWould you like to see raw data scroll? enter yes or no\n').lower().strip()
+            if displayer == 'yes':
+                print(tabulate(df.iloc[row_index:row_index + scroll], headers = 'keys'))
+                row_index += scroll
+            elif displayer == 'no':
+                break
+            else:
+                print('Wrong input!.. Enter \'yes\' or \'no\' only!' )
+           except:
+               print('An Error Occurred')
 
 
 
 def main():
     while True:
-        city, month, day = get_filters()
-        df = load_data(city, month, day)
+        try:
+            city, month, day = get_filters()
+            df = load_data(city, month, day)
 
-        time_stats(df)
-        station_stats(df)
-        trip_duration_stats(df)
-        user_stats(df)
-        display_scroll(df)
-
-        restart = input('\nWould you like to restart? Enter yes or no.\n').strip()
-        if restart.lower() != 'yes':
-            break
-
+            time_stats(df)
+            station_stats(df)
+            trip_duration_stats(df)
+            user_stats(df)
+            display_scroll(df)
+            while True:
+                restart = input('\nWould you like to restart? Enter yes or no.\n').lower().strip()
+                if restart == 'yes' or restart == 'no':
+                    break
+                else:
+                    print('Wrong input!.. Enter \'yes\' or \'no\' only!' )
+            if restart == 'no':
+                break
+        except:
+            print('An Error Occurred!')
 
 if __name__ == "__main__":
     main()
