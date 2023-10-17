@@ -20,7 +20,7 @@ def get_filters():
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         try:
-            city = input('Enter City name e.g. (chicago, new york city, washington): ').lower()
+            city = input('Enter City name e.g. (chicago, new york city, washington): ').lower().strip()
             if city in ['chicago', 'new york city', 'washington']: 
                 break
             else:
@@ -31,7 +31,7 @@ def get_filters():
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
         try:
-            month = input('Enter month e.g.(all, january, february, ... , june): ').lower()
+            month = input('Enter month e.g.(all, january, february, ... , june): ').lower().strip()
             if month in ['all', 'january', 'february', 'march', 'april', 'may', 'june']:
                 break
             else:
@@ -42,7 +42,7 @@ def get_filters():
 
     while True:
         try:
-            day = input('Enter day of the week e.g. (all, monday, tuesday, ... sunday): ').title() # i changed it to lower so that 'input(all) can work'
+            day = input('Enter day of the week e.g. (all, monday, tuesday, ... sunday): ').title().strip() # i changed it to lower so that 'input(all) can work'
             if day in ['All', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']:
                 break
             else:
@@ -196,7 +196,7 @@ def display_scroll(df):
     row_index = 0
     scroll = 5
     while True:
-        displayer = input('Would you like to see raw data scroll? enter yes or no ').lower()
+        displayer = input('Would you like to see raw data scroll? enter yes or no ').lower().strip()
         if displayer == 'yes':
             print(tabulate(df.iloc[row_index:row_index + scroll], headers = 'keys'))
             row_index += scroll
@@ -216,7 +216,7 @@ def main():
         user_stats(df)
         display_scroll(df)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        restart = input('\nWould you like to restart? Enter yes or no.\n').strip()
         if restart.lower() != 'yes':
             break
 
