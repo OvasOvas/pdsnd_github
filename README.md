@@ -14,6 +14,14 @@ This project employs Python code to analyze data from bikeshare systems in three
 * new_york_city.csv
 * washington.csv
 
+### Libraries and Installation
+- time (import time)
+- Numpy (import numpy as np)
+- Pandas (import pandas as pd)
+- Tabulate (from tabulate import tabulate)
+
+*N/B* `pep install [library_name] --version` before use.
+
 ### Credits
 - [walkthrough](https://drive.google.com/file/d/1jVEWJ6ZFLSvHW7y5opGs-hD-1pr4Xwh9/view)
 - [python documentation](https://docs.python.org/3/)
