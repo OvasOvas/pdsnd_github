@@ -20,7 +20,7 @@ def get_filters():
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         try:
-            city = input('Enter City name e.g. (chicago, new york city, washington): ').lower()
+            city = input('Enter City name e.g. (chicago, new york city, washington): ').lower() #all input converted to lowercase to avoid errors
             if city in ['chicago', 'new york city', 'washington']: 
                 break
             else:
@@ -42,7 +42,7 @@ def get_filters():
 
     while True:
         try:
-            day = input('Enter day of the week e.g. (all, monday, tuesday, ... sunday): ').title() # i changed it to lower so that 'input(all) can work'
+            day = input('Enter day of the week e.g. (all, monday, tuesday, ... sunday): ').title() # convert input to title so that input(all) can work
             if day in ['All', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']:
                 break
             else:
@@ -50,12 +50,12 @@ def get_filters():
         except:
             print('wrong input, choose month name from list (january, february, march, april, may, june')
     print('-'*40)
-    return city, month, day
+    return city, month, day #returns user input
 
 # get_filters()
 
 
-def load_data(city, month, day):
+def load_data(city, month, day): #loads data returned by the user input
     """
     Loads data for the specified city and filters by month and day if applicable.
 
@@ -73,14 +73,14 @@ def load_data(city, month, day):
     df['Day of Week'] = df['Start Time'].dt.day_name() #create a day of week column with Days
 
     # filter by month
-    if month != 'all':
+    if month != 'all': #if user input is 'all' this code block is bypassed
         months = ['january', 'february', 'march', 'april', 'may', 'june']
-        month = months.index(month.lower()) + 1
+        month = months.index(month.lower()) + 1 #selects index from the months list based on the user input for month and adds 1 to suffice for zero index
 
         df = df[df['Month'] == month] # filters by month
 
     # filter by day of week
-    if day != 'All': #using a capital 'All' so as to pass through the input check.
+    if day != 'All': #using a capital 'All' so as to pass through the input check title() function.
         df = df[df['Day of Week'] == day]
 
     return df
@@ -93,9 +93,9 @@ def time_stats(df):
     start_time = time.time()
 
     # display the most common month
-    most_month = df['Month'].mode()[0]
+    most_month = df['Month'].mode()[0] #gets the most common month from the dataset
     months = ['january', 'february', 'march', 'april', 'may', 'june']
-    most_common_month = months[most_month - 1]
+    most_common_month = months[most_month - 1] #subtracts one and supplies it to months list to get the right index
     print(f'most common month is:                {most_common_month.title()}')
 
     # display the most common day of week
@@ -169,7 +169,7 @@ def user_stats(df):
     user_types = df['User Type'].value_counts()
     print(f'the user types count is:\n             {user_types}\n')
 
-    try:
+    try: # using a try block to bypass gender prompts for cities with no data for gender
 
         # Display counts of gender
         gender = df['Gender'].value_counts()
@@ -193,13 +193,13 @@ def user_stats(df):
         pass
 
 def display_scroll(df):
-    row_index = 0
-    scroll = 5
+    row_index = 0 # initializing the row index to start printing from
+    scroll = 5 # initializaing the number of lines to print out
     while True:
         displayer = input('Would you like to see raw data scroll? enter yes or no ').lower()
         if displayer == 'yes':
-            print(tabulate(df.iloc[row_index:row_index + scroll], headers = 'keys'))
-            row_index += scroll
+            print(tabulate(df.iloc[row_index:row_index + scroll], headers = 'keys')) # using the tabulate module to print the first five row slices of the dataset
+            row_index += scroll #updating row index
         else: 
             break
 
